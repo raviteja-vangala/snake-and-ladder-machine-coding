@@ -1,6 +1,8 @@
 
 # Design Snake And Ladder | Machine Coding Round
 
+![Snake And Ladder](https://wat-images.s3.ap-south-1.amazonaws.com/images/machine-coding/snake-and-ladder/snl.gif "Snake And Ladder")
+
 ## Problem Statement
 Create a snake and ladder application. The application should take as input (from the command line or a file):
 * Size of the board
