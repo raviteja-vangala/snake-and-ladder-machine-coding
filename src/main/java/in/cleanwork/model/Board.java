@@ -18,12 +18,17 @@ public class Board {
         this.ladders = ladders;
     }
 
-    public static synchronized Board getInstance(int size, int numberOfDices, Map<Integer, Integer> snakes, Map<Integer, Integer> ladders) {
-        if (instance == null) {
-            instance = new Board(size, numberOfDices, snakes, ladders);
+    public static Board getInstance(int size, int numberOfDices, Map<Integer, Integer> snakes, Map<Integer, Integer> ladders) {
+        Board result = instance;
+        if (result != null) return result;
+
+        synchronized (Board.class) {
+            if (instance == null) {
+                instance = new Board(size, numberOfDices, snakes, ladders);
+            }
+
+            return instance;
         }
-        
-        return instance;
     }
 
     public int getDiceValue() {
