@@ -44,7 +44,7 @@ When someone wins the game, print that the player won the game.
 * Snakes and Ladders do not form an infinite loop.
 
 
-#### Sample Input
+### Sample Input
 ```
 100
 1
@@ -72,7 +72,7 @@ Gaurav
 Sagar
 ```
 
-#### Sample Output
+### Sample Output
 ```
 Gaurav rolled a 6 and moved from 0 to 6
 Sagar rolled a 1 and moved from 0 to 1
