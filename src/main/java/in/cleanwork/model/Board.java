@@ -4,16 +4,26 @@ import java.util.Map;
 
 public class Board {
 
+    private static Board instance;
+
     private final int size;
     private final int numberOfDices;
     private final Map<Integer, Integer> snakes; // key -> head, value -> tail
     private final Map<Integer, Integer> ladders; // key -> start, value -> end
 
-    public Board(int size, int numberOfDices, Map<Integer, Integer> snakes, Map<Integer, Integer> ladders) {
+    private Board(int size, int numberOfDices, Map<Integer, Integer> snakes, Map<Integer, Integer> ladders) {
         this.size = size;
         this.numberOfDices = numberOfDices;
         this.snakes = snakes;
         this.ladders = ladders;
+    }
+
+    public static Board getInstance(int size, int numberOfDices, Map<Integer, Integer> snakes, Map<Integer, Integer> ladders) {
+        if (instance == null) {
+            instance = new Board(size, numberOfDices, snakes, ladders);
+        }
+        
+        return instance;
     }
 
     public int getDiceValue() {
