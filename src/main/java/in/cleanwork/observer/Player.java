@@ -1,11 +1,11 @@
-package in.cleanwork.model;
+package in.cleanwork.observer;
 
-public class PlayerDetails {
+public class Player implements Observer {
 
     private final String name;
     private int position;
 
-    public PlayerDetails(String name) {
+    public Player(String name) {
         this.name = name;
     }
 
@@ -22,10 +22,7 @@ public class PlayerDetails {
     }
 
     @Override
-    public String toString() {
-        return "PlayerDetails{" +
-                "name='" + name + '\'' +
-                ", position=" + position +
-                '}';
+    public void update(String message) {
+        System.out.println(this.name + " : " + message);
     }
 }

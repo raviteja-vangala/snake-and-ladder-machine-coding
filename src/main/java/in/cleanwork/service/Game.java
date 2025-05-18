@@ -1,51 +1,34 @@
 package in.cleanwork.service;
 
-import in.cleanwork.model.Board;
-import in.cleanwork.model.PlayerDetails;
+import in.cleanwork.observer.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
 
-    private final Board board;
-    private final List<PlayerDetails> playerDetailsList;
+    private int currentPlayerIndex;
+    private final List<Player> playerList;
 
-    public Game(Board board, List<PlayerDetails> playerDetailsList) {
-        this.board = board;
-        this.playerDetailsList = playerDetailsList;
+    public Game() {
+        this.playerList = new ArrayList<>();
     }
 
-    public void start() {
-        while (playerDetailsList.size() > 1) {
-            for (PlayerDetails playerDetails : playerDetailsList) {
+    public void addPlayer(Player player) {
+        playerList.add(player);
+    }
 
-                int diceValue = board.getDiceValue();
-                int newPosition = board.getNewPosition(playerDetails.getPosition(), diceValue);
+    public Player getCurrentPlayer() {
+        return playerList.get(currentPlayerIndex);
+    }
 
-                printDetails(playerDetails, diceValue, newPosition);
-                playerDetails.setPosition(newPosition);
+    public void nextTurn() {
+        currentPlayerIndex = (currentPlayerIndex + 1) % playerList.size();
+    }
 
-                if (checkForWin(playerDetails)) {
-                    playerDetailsList.remove(playerDetails);
-                    printWinner(playerDetails);
-                    break;
-                }
-            }
+    public void notifyPlayers(String message) {
+        for (Player player : playerList) {
+            player.update(message);
         }
-
-    }
-
-    private boolean checkForWin(PlayerDetails playerDetails) {
-        return board.reachedEnd(playerDetails.getPosition());
-    }
-
-    private void printDetails(PlayerDetails playerDetails, int diceValue, int newPosition) {
-        String message = String.format("%s rolled a %d and moved from %d to %d", playerDetails.getName(), diceValue, playerDetails.getPosition(), newPosition);
-        System.out.println(message);
-    }
-
-    private void printWinner(PlayerDetails playerDetails) {
-        String message = String.format("%s wins the game", playerDetails.getName());
-        System.out.println(message);
     }
 }
